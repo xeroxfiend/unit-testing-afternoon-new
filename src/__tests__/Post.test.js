@@ -1,6 +1,6 @@
 import React from "react";
 import {render, act} from "@testing-library/react";
-import {Post} from "../views/Post";
+import Post from "../views/Post";
 import axios from "axios";
 import {MemoryRouter} from "react-router-dom";
 import {posts} from "../__tests__/__data__/testData";
@@ -12,7 +12,13 @@ it("component can render a post", async () => {
     .spyOn(axios, "get")
     .mockImplementation(() => Promise.resolve({data: post}));
 
-    await act(async () => {
-        
-    })
+  await act(async () => {
+    let renderObj = render(
+      <MemoryRouter>
+        <Post match={{params: {postId: 1}}} />
+      </MemoryRouter>
+    );
+    container = renderObj.container;
+  });
+  expect(container.textContent).toContain(post.text);
 });
