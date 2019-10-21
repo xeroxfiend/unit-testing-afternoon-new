@@ -17,5 +17,6 @@ it('should count the number of words in a sentence', () => {
 })
 
 it('should correctly attach a users name to a post', () => {
-    
+    const newPosts = attachUserName(users, posts)
+    expect(newPosts[0]).toHaveProperty('displayName')
 })
